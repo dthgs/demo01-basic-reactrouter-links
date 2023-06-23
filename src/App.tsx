@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { TopBar, Typography, Icon, Switch } from '@equinor/eds-core-react'
+import { apps } from '@equinor/eds-icons'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Deal from './pages/Deal/Deal'
+import DealList from './pages/DealList/DealList'
+
+Icon.add({ apps }) // needs only to be done once
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<TopBar>
+				<TopBar.Header>
+					<Icon name='apps' /> Application name - demo
+				</TopBar.Header>
+			</TopBar>
+			<BrowserRouter>
+				<div>
+					{/* A <Switch> looks through its children <Route>s and renders the first one that matches the current URL. */}
+					<Routes>
+						<Route path='/deal/:dealId' element={<Deal />} />
+						<Route path='/' element={<DealList />} />
+					</Routes>
+				</div>
+			</BrowserRouter>
+		</div>
+	)
 }
 
-export default App;
+export default App
